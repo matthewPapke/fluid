@@ -1,0 +1,1 @@
+A flexible, hierarchical calendar. Daily tasks can rollup into weekly tasks in order to create a more realistic, less tyranical calendar. Eventually contexts, such as days, weeks, and months, will be arbitrary, thus allowing for maximum flexibility.
