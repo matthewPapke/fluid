@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+function displayForm() {
+  $("#add-task-button").toggle();
+  $("#create-task").toggle();
+}
+
+function hideForm(){
+  $("#create-task").toggle(); 
+  $("#add-task-button").toggle(); 
+}
+
+</script>
 <style>
 * {box-sizing: border-box;}
 ul {list-style-type: none;}
@@ -8,35 +21,40 @@ body {font-family: Verdana, sans-serif;}
 
 .title {
   text-align: center;
+  font-family: Verdana, sans-serif;
 }
 
-.month {
+.week {
   padding: 70px 25px;
   width: 100%;
-  background: #1abc9c;
+  background: #4a7c59;
   text-align: center;
 }
 
-.month ul {
+.week ul {
   margin: 0;
   padding: 0;
 }
 
-.month ul li {
+.week ul li {
   color: white;
   font-size: 20px;
   text-transform: uppercase;
   letter-spacing: 3px;
 }
 
-.month .prev {
+.week .prev {
   float: left;
   padding-top: 10px;
 }
 
-.month .next {
+.week .next {
   float: right;
   padding-top: 10px;
+}
+
+.week .date-range {
+  font-size: 30px;  
 }
 
 .weekdays {
@@ -74,6 +92,30 @@ body {font-family: Verdana, sans-serif;}
   color: white !important
 }
 
+.bucket{
+  text-align: center;
+  background: #c8d5b9;
+}
+
+.bucket ul {
+  list-style-position: inside;
+}
+
+.bucket li {
+  list-style-type: square;
+  color: #777; 
+  font-size: 50px; 
+}
+
+.bucket button {
+  color: #777; 
+  font-size: 50px;
+}
+
+#create-task {
+  display: none;
+}
+
 /* Add media queries for smaller screens */
 @media screen and (max-width:720px) {
   .weekdays li, .days li {width: 13.1%;}
@@ -91,13 +133,11 @@ body {font-family: Verdana, sans-serif;}
 </head>
 <body>
 
-<h1 class="title">Fluid Calendar</h1>
-
-<div class="month">      
+<div class="week">      
   <ul>
     <li class="prev">&#10094;</li>
     <li class="next">&#10095;</li>
-    <li>
+    <li class="date-range">
       {{ month }} {{ week.Monday }}-{{ week.Sunday }} <br>
       <span style="font-size:18px">{{ year }}</span>
     </li>
@@ -123,6 +163,24 @@ body {font-family: Verdana, sans-serif;}
   <li>{{ week.Saturday }}</li>
   <li>{{ week.Sunday }}</li>
 </ul>
+<br/>
+
+<div class="bucket">
+  <!-- onClick show form -->
+  <button id="add-task-button" onclick="displayForm()">Add Task</button>
+  <form id="create-task">
+    <b>Name:</b> <input type="text"><br/>
+    <b>Description:</b> <input type="text"><br/>
+    <b>Count:</b> <input type="text"><br/>
+    <button type="button" id="submit">Create</button><br/>
+    <button type="button" onclick="hideForm()">Cancel</button><br/>
+  </form>
+  <ul>
+    <li>Read</li>
+    <li>Workout</li>
+    <li>Cook</li>  
+  </ul>
+</div>
 
 </body>
 </html>
