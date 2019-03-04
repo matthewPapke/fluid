@@ -1,17 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script>
-function displayForm() {
-  $("#add-task-button").toggle();
-  $("#create-task").toggle();
-}
-
-function hideForm(){
-  $("#create-task").toggle(); 
-  $("#add-task-button").toggle(); 
-}
 
 </script>
 <style>
@@ -107,14 +100,29 @@ body {font-family: Verdana, sans-serif;}
   font-size: 50px; 
 }
 
+.bucket h1 {
+  font-family: Verdana, sans-serif;
+  color: #777;
+  font-size: 50px;
+  font-weight: bold;
+
+}
 .bucket button {
   color: #777; 
   font-size: 50px;
 }
 
-#create-task {
-  display: none;
+
+.modal-dialog{
+  width: 50%;
+  height:800px !important;
+  margin: auto;
 }
+
+.modal-content {
+  height: 80%;
+  padding-left: 5px;
+}     
 
 /* Add media queries for smaller screens */
 @media screen and (max-width:720px) {
@@ -155,31 +163,57 @@ body {font-family: Verdana, sans-serif;}
 </ul>
 
 <ul class="days">  
-  <li>{{ week.Monday }}</li>
-  <li>{{ week.Tuesday }}</li>
-  <li>{{ week.Wednesday }}</li>
-  <li>{{ week.Thursday }}</li>
-  <li>{{ week.Friday }}</li>
-  <li>{{ week.Saturday }}</li>
-  <li>{{ week.Sunday }}</li>
+  <li><span>{{ week.Monday }} <button type="button" data-toggle="modal" data-target="#myModal">+</button></span></li>
+  <li><span>{{ week.Tuesday }} <button type="button" data-toggle="modal" data-target="#myModal">+</button></span></li>
+  <li><span>{{ week.Wednesday }} <button type="button" data-toggle="modal" data-target="#myModal">+</button></span></li>
+  <li><span>{{ week.Thursday }} <button type="button" data-toggle="modal" data-target="#myModal">+</button></span></li>
+  <li><span>{{ week.Friday }} <button type="button" data-toggle="modal" data-target="#myModal">+</button></span></li>
+  <li><span>{{ week.Saturday }} <button type="button" data-toggle="modal" data-target="#myModal">+</button></span></li>
+  <li><span>{{ week.Sunday }} <button type="button" data-toggle="modal" data-target="#myModal">+</button></span></li>
 </ul>
 <br/>
 
 <div class="bucket">
-  <!-- onClick show form -->
-  <button id="add-task-button" onclick="displayForm()">Add Task</button>
-  <form id="create-task">
-    <b>Name:</b> <input type="text"><br/>
-    <b>Description:</b> <input type="text"><br/>
-    <b>Count:</b> <input type="text"><br/>
-    <button type="button" id="submit">Create</button><br/>
-    <button type="button" onclick="hideForm()">Cancel</button><br/>
-  </form>
+  <h1>Weekly Tasks</h1>
+    <!-- Modal -->
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h1 class="modal-title">New Task</h1>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group row text-left">
+              <label>Task Name:</label>
+              <input type="text" class="form-control"/>
+            </div>
+            <div class="form-group row text-left">
+              <label>Context:</label>
+              <input type="text" class="form-control"/>
+            </div>
+            <div class="form-group row text-left">
+              <label>Type:</label>
+              <input type="text" class="form-control"/>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="cancel" class="btn btn-default">Cancel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <ul>
     <li>Read</li>
     <li>Workout</li>
     <li>Cook</li>  
   </ul>
+  <!-- onClick show form -->
+  <button type="button" data-toggle="modal" data-target="#myModal">+</button>
 </div>
 
 </body>
